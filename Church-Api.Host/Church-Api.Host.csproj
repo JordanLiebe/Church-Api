@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Church-Api.Data\Church-Api.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

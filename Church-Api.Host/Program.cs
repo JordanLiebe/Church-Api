@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IDocumentStore, CosmosDocumentStore>();
+builder.Services.AddSingleton<IEntityStore, CosmosEntityStore>();
 
 var app = builder.Build();
 

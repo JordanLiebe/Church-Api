@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Church_Api.Data.Interfaces
+namespace Church_Api.Domain
 {
-    public interface IDocumentStore
+    public interface IEntity
     {
+        public string Id { get; set; }
+        public string Type { get; }
     }
 }

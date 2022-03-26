@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Church_Api.Data.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,17 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Church_Api.Domain
+namespace Church_Api.Data.Implementations
 {
     [DebuggerDisplay("{Type}/{Id}")]
-    public class EntityBase : IEntity
+    public class BaseEntity : IEntity
     {
-        public EntityBase(string? id = null)
+        public BaseEntity(string? id = null)
         {
             if (id == null)
                 id = Guid.NewGuid().ToString();
 
             Id = id;
+            Created = DateTime.Now;
+            CreatedBy = "System";
+            LastUpdated = DateTime.Now;
+            LastUpdatedBy = "System";
         }
 
         [Key, JsonProperty(PropertyName = "id")]
@@ -31,5 +36,10 @@ namespace Church_Api.Domain
                 return this.GetType().Name.ToLower();
             }
         }
+
+        public DateTime Created { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime LastUpdated { get; set; }
+        public string LastUpdatedBy { get; set; }
     }
 }

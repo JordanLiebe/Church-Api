@@ -1,5 +1,5 @@
-﻿using Church_Api.Data;
-using Church_Api.Data.Interfaces;
+﻿using Church_Api.Data.Interfaces;
+using Church_Api.Data.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Church_Api.Host.Controllers
@@ -15,11 +15,21 @@ namespace Church_Api.Host.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAction()
+        public async Task<IActionResult> GetAction(string id)
         {
-            EntityBase test = new EntityBase("12345");
+            var response = await _entityStore.GetAsync<BaseEntity>("Test", id);
 
-            return Ok(test);
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAction(string id)
+        {
+            BaseEntity testEntity = new BaseEntity(id);
+
+            var response = await _entityStore.CreateAsync("Test", testEntity);
+
+            return Ok(response);
         }
     }
 }

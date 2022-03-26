@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Church_Api.Host</RootNamespace>
+    <UserSecretsId>65cc2a37-6529-4533-817a-d981553d8a24</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Church-Api.Data\Church-Api.Data.csproj" />
+    <ProjectReference Include="..\Church-Api.Domain\Church-Api.Domain.csproj" />
   </ItemGroup>
 
 </Project>

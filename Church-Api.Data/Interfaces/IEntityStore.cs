@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Church_Api.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Church_Api.Data.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
         /// <returns></returns>
-        public T Create<T>(T item);
+        public Task<EntityStoreResponse<T>> CreateAsync<T>(string containerId, T item) where T : IEntity;
 
         /// <summary>
         /// Creates multiple items in the Entity Store.
@@ -22,7 +23,7 @@ namespace Church_Api.Data.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public IEnumerable<T> CreateMany<T>(IEnumerable<T> items);
+        public Task<EntityStoreManyResponse<T>> CreateManyAsync<T>(IEnumerable<T> items) where T : IEntity;
 
         /// <summary>
         /// Reads one item from the Entity Store using its unique id.
@@ -30,7 +31,7 @@ namespace Church_Api.Data.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        public T Get<T>(string id);
+        public Task<EntityStoreResponse<T>> GetAsync<T>(string containerId, string id) where T : IEntity;
 
         /// <summary>
         /// Reads many items from the Entity Store using a Cosmos Query.
@@ -38,7 +39,7 @@ namespace Church_Api.Data.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <returns></returns>
-        public T GetMany<T>(string query);
+        public Task<EntityStoreManyResponse<T>> GetManyAsync<T>(string query) where T : IEntity;
 
         /// <summary>
         /// Updates an item in the Entity Store using its id a replacement object.
@@ -46,7 +47,7 @@ namespace Church_Api.Data.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
         /// <returns></returns>
-        public T Update<T>(T item);
+        public Task<EntityStoreResponse<T>> UpdateAsync<T>(string containerId, string id, T item) where T : IEntity;
 
         /// <summary>
         /// Deletes an item from the Entity Store by its unique id.
@@ -54,6 +55,6 @@ namespace Church_Api.Data.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        public T Delete<T>(string id);
+        public Task<EntityStoreResponse<T>> DeleteAsync<T>(string containerId, string id) where T : IEntity;
     }
 }

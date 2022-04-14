@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 
 namespace Church_Api.Data.Models
 {
-    public class EntityStoreResponse<T> where T : IEntity
+    public class EntityStoreResponse<T>
     {
-        public T? Document { get; set; }
-        public IEnumerable<string>? Errors { get; set; }
-        public bool hasErrors
+        public EntityStoreResponse(T? data, int? count = null, IEnumerable<EntityStoreError>? errors = null)
         {
-            get
-            {
-                return Errors != null && Errors.Count() > 0;
-            }
+            Data = data;
+            Count = count ?? (Data != null ? 1 : 0);
+            Errors = errors ?? new List<EntityStoreError>();
         }
-        public bool succeeded
+
+        public int Count { get; protected set; }
+        public T? Data { get; protected set; }
+        public IEnumerable<EntityStoreError> Errors { get; protected set; }
+        public bool wasSuccessful
         {
             get
             {
-                return Errors == null || Errors.Count() > 0;
+                return Errors.Count() == 0 
+                    && Data != null;
             }
         }
     }

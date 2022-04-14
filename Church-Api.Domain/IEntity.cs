@@ -10,8 +10,8 @@ namespace Church_Api.Data.Interfaces
     {
         public string Id { get; set; }
         public string Type { get; }
-        public DateTime Created { get; set; }
-        public string CreatedBy { get; set; }
+        public DateTime Created { get; }
+        public string CreatedBy { get; }
         public DateTime LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     }

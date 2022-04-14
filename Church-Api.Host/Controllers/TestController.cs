@@ -15,6 +15,14 @@ namespace Church_Api.Host.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetManyAction(string? query)
+        {
+            var response = await _entityStore.GetManyAsync<BaseEntity>("Test", query);
+
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetAction(string id)
         {
             var response = await _entityStore.GetAsync<BaseEntity>("Test", id);
@@ -23,11 +31,27 @@ namespace Church_Api.Host.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAction(string id)
+        public async Task<IActionResult> PostAction(BaseEntity obj)
         {
-            BaseEntity testEntity = new BaseEntity(id);
+            var response = await _entityStore.CreateAsync("Test", obj);
 
-            var response = await _entityStore.CreateAsync("Test", testEntity);
+            return Ok(response);
+        }
+
+        [HttpPost("batch")]
+        public async Task<IActionResult> PostAction(IEnumerable<BaseEntity> batchEntites)
+        {
+            var response = await _entityStore.CreateManyAsync("Test", batchEntites);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAction(string id)
+        {
+            List<string> deleteIds = new List<string> { "Jordan123", "Jacob123", id };
+
+            var response = await _entityStore.DeleteManyAsync<BaseEntity>("Test", deleteIds);
 
             return Ok(response);
         }

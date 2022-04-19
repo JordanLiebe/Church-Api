@@ -1,6 +1,7 @@
 ﻿using Church_Api.Data.Interfaces;
 using Church_Api.Data.Implementations;
 using Microsoft.AspNetCore.Mvc;
+using Church_Api.Domain;
 
 namespace Church_Api.Host.Controllers
 {
@@ -27,7 +28,11 @@ namespace Church_Api.Host.Controllers
         {
             var response = await _entityStore.GetAsync<BaseEntity>("Test", id);
 
-            return Ok(response);
+            BaseEntity? test = response.Data;
+
+            JsonResource<BaseEntity> resource = new JsonResource<BaseEntity>(test);
+
+            return Ok(resource);
         }
 
         [HttpPost]
